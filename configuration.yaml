@@ -13,7 +13,6 @@ scene: !include scenes.yaml
 
 # Custom services like the smartcar will be configured here
 smartcar:
-  platform: auth_client
 
 logger:
   default: info
