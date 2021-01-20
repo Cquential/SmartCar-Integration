@@ -1,0 +1,493 @@
+{
+	"info": {
+		"_postman_id": "70eae9ad-f99d-4120-87bc-528e7ac6ec4f",
+		"name": "Smartcar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authenticate Client",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTAxMTgxODksImlhdCI6MTYxMDExNzg4OSwibmJmIjoxNjEwMTE3ODg5LCJpZGVudGl0eSI6MX0.wzwmQroZ97alpxtCO8hvwxsjkQXNOm8NNwZhFjWeJvg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CLIENT_ID\": \"{{put CLIENT_ID here}}\",\r\n    \"CLIENT_SECRET\": \"{{put CLIENT_SECRET here}}\",\r\n    \"REDIRECT_URI\": \"http://localhost:8000/exchange\",\r\n    \"scope\": [\"read_odometer\", \"read_vehicle_info\", \"required:read_location\", \"read_engine_oil\", \"read_battery\", \"read_charge\", \"read_fuel\", \"control_security\", \"read_tires\", \"read_vin\"],\r\n    \"test_mode\": \"True\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/authclient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"authclient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Access vehicle",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vehicle_id\": \"{{put vehicle id here}}\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/accessVehicle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"accessVehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get permissions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/permissions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/application",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"application"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Engine oil",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/engine/oil",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"engine",
+						"oil"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lock",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/lock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"lock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Location",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/location",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"location"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fuel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/fuel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"fuel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop charge",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/stopcharge",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"stopcharge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start charge",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/startcharge",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"startcharge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Charge details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/charge",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"charge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unlock",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/unlock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"unlock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Odometer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/odometer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"odometer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tire Pressure",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/tires/pressure",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"tires",
+						"pressure"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicle details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Battery status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/battery",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"battery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read VIN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/vehicles/{{code}}/vin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"vehicles",
+						"{{code}}",
+						"vin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"current_token\": \"{{put current token here}}\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/refreshToken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"refreshToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check compatibility",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vin\": {{put vin here}},\r\n    \"scope\": [\"read_odometer\", \"read_vehicle_info\", \"required:read_location\", \"read_engine_oil\", \"read_battery\", \"read_charge\", \"read_fuel\", \"control_security\", \"read_tires\", \"read_vin\"],\r\n    \"country\": \"US\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/checkCompatiblity",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"checkCompatiblity"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

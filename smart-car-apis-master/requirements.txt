@@ -1,0 +1,4 @@
+flask==1.1.2
+requests==2.25.1
+flask-jwt==0.3.2
+smartcar==5.1.0

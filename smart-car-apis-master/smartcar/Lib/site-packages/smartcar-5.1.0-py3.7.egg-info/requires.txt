@@ -1,0 +1,11 @@
+python-dateutil
+requests
+
+[dev]
+black
+coverage
+nose
+mock
+responses
+selenium
+retrying
