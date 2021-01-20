@@ -1,5 +1,6 @@
 from homeassistant.helpers.typing import HomeAssistantType
 from .const import DOMAIN, ATTR_NAME, DEFAULT_NAME,request, client
+from .auth_client import login
 import smartcar
 # import asyncio
 
@@ -15,8 +16,7 @@ def setup(hass:HomeAssistantType, config):
         hass.states.set("smartcar.hello", name)
     def authclient(call):
         data = call.data # data is a json object pretty much, treat it as a dictionary
-        print(type(data),data)
-        # global client
+        print(data)
         client = smartcar.AuthClient(
                     client_id=data['CLIENT_ID'],
                     client_secret=data['CLIENT_SECRET'],
@@ -24,6 +24,10 @@ def setup(hass:HomeAssistantType, config):
                     scope = data['scope'],
                     test_mode = bool(data['test_mode'])
         )
+        # print(type(client))
+        login(client,hass)
+        # hass.states.set("smartcar.auth_url", auth_url)
+        # hass.http.register_redirect(auth_url,)
         hass.states.set("smartcar.authclient", "success")
         # return {"status": "success"}
 

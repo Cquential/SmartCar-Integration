@@ -4,13 +4,14 @@
                                                                                 (Replace later on)  
 """
 
+from homeassistant.helpers.typing import HomeAssistantType
 import smartcar
-from .const import (access, request, redirect, vehicleobj)
+from .const import (access, request, redirect, vehicleobj, client)
 
 def authclient():
     data = request.get_json()
     print(type(data),data)
-    global client
+    # global client
     client = smartcar.AuthClient(
                 client_id=data['CLIENT_ID'],
                 client_secret=data['CLIENT_SECRET'],
@@ -20,12 +21,21 @@ def authclient():
     )
     return {"status": "success"}
 
-def login():
+def login(client:smartcar.AuthClient,hass:HomeAssistantType):
     # TODO: Authorization Step 2: Launch Smartcar authentication dialog
     if client == None:
-        return {"status": "Client not authenticated"}
+        hass.states.set("smartcar.login","Client not Authenicated") 
+        # return {"status": "Client not authenticated"}
     auth_url = client.get_auth_url()
-    return redirect(auth_url)
+    return hass.http.register_redirect(auth_url, exchange)
+
+def exchange():
+    global code
+    code = request.args.get('code')
+    global access
+    access = client.exchange_code(code)
+    vehicle_ids = smartcar.get_vehicle_ids(access['access_token'])['vehicles']
+    return {"vehicle_ids": vehicle_ids}
 
 def refreshToken():
     global access
