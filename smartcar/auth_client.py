@@ -5,7 +5,7 @@
 """
 
 import smartcar
-from .const import access, request, Flask, redirect, jsonify
+from .const import (access, request, redirect, vehicleobj)
 
 def authclient():
     data = request.get_json()
@@ -34,3 +34,16 @@ def refreshToken():
         access = client.exchange_refresh_token(access['refresh_token'])
         return {"status": "refreshed"}
     return {"status": "token mismatch"}
+
+def disconnect(id):
+    global code, access, vehicleobj, client
+    if vehicleobj == None:
+        return {"status": "No vehicle selected"}
+    if id != code:
+        return {"status": "Invalid code"}
+    vehicleobj.disconnect()
+    code = None
+    access = None
+    vehicleobj = None
+    client = None
+    return {"status": "Disconnected"}
