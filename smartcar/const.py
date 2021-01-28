@@ -1,4 +1,4 @@
-from flask import  request,  redirect, jsonify
+from flask import jsonify
 
 DOMAIN = "smartcar"
 ATTR_NAME = "name"
