@@ -10,11 +10,11 @@ def refreshToken(call):
         return {"status": "refreshed"}
     return {"status": "token mismatch"}
 
-def disconnect(call):
+def disconnect(id):
     global code, access, vehicleobj, client
     if vehicleobj == None:
         return {"status": "No vehicle selected"}
-    if call.data.get('id') != code:
+    if id != code:
         return {"status": "Invalid code"}
     vehicleobj.disconnect()
     code = None

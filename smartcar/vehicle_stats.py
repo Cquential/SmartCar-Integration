@@ -1,4 +1,4 @@
-from .const import code, jsonify, access
+from .const import code, access
 import smartcar
 
 def not_auth(code):
@@ -17,15 +17,15 @@ def permissions(id):
         return {"status": "No vehicle selected"}
     if id != code:
         return {"status": "Invalid code"}
-    return jsonify(vehicleobj.permissions())
+    # return jsonify(vehicleobj.permissions())
+    return vehicleobj.permissions()
 
 
-def batch(call, id):
+def batch(data, id):
     if vehicleobj == None:
         return {"status": "No vehicle selected"}
     if id != code:
         return {"status": "Invalid code"}
-    data = call.data
     return vehicleobj.batch(data['batch'])
 
 def read_battery(id):

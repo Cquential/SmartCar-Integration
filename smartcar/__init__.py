@@ -1,7 +1,6 @@
-from config.custom_components.smartcar.vehicle_stats import accessVehicle, not_auth
+from .vehicle_stats import *
 from homeassistant import core
 from .auth import *
-# from .vehicle_stats import veh_wrapper
 from homeassistant.helpers.typing import HomeAssistantType
 from .const import DOMAIN, ATTR_NAME, DEFAULT_NAME,request, client, jsonify
 import smartcar
@@ -44,17 +43,36 @@ def setup(hass:HomeAssistantType, config):
         data = call.data
         global code
         if not_auth(code):
+            perms = permissions(code)
             vehicle_obj = accessVehicle(data, code)
+            battery = read_battery(code)
+            oil = read_engine_oil(code)
+            charge = read_charge(code)
+            start = start_charge(code)
+            stop = stop_charge(code)
+            fuel = read_fuel(code)
+            loc = read_location(code)
+            odo = read_odometer(code)
+            tires = read_tires(code)
+            info  = read_vehicle_info(code)
+            vin = read_vin(code)
+            if data.get("batch",0):
+                batch(data, code)
+            if data.get("lock",0)!= None or data.get("lock")!=False:
+                locked = lock(code)
+            if data.get("unlock",0)!= None or data.get("unlock")!=False:
+                unlocked = unlock(code)         
 
         hass.states.set("smartcar.VehicleStats","Electric Boogaloo")
-
+        disconnect(code)
     # Load/register the platforms we need
 
     hass.services.register(DOMAIN, 'auth_client', authclient)
     hass.services.register(DOMAIN, 'exchange', exchange)
     hass.services.register(DOMAIN, 'vehicle_stats', veh_wrapper)
     
-    #TODO Platforms!!!
+    #TODO Platforms, refreshToken
+
     # for component in PLATFORMS:
     #     hass.helpers.discovery.load_platform(component, DOMAIN, {}, config)
     #     hass.services.register(DOMAIN, component+'_service', config)
