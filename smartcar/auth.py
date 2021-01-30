@@ -1,5 +1,5 @@
 import homeassistant
-from .const import access, request, vehicleobj, code
+from .const import access, vehicleobj, code
 import smartcar
 
 def refreshToken(call):

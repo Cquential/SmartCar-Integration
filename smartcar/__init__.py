@@ -2,9 +2,8 @@ from .vehicle_stats import *
 from homeassistant import core
 from .auth import *
 from homeassistant.helpers.typing import HomeAssistantType
-from .const import DOMAIN, ATTR_NAME, DEFAULT_NAME,request, client, jsonify
+from .const import DOMAIN, client
 import smartcar
-# import asyncio
 
 # PLATFORMS = ["auth_client", "vehicle_stats"]
 
@@ -63,7 +62,7 @@ def setup(hass:HomeAssistantType, config):
             if data.get("unlock",0)!= None or data.get("unlock")!=False:
                 unlocked = unlock(code)         
 
-        hass.states.set("smartcar.VehicleStats","Electric Boogaloo")
+        hass.states.set("smartcar.VehicleStats","success")
         disconnect(code)
     # Load/register the platforms we need
 
